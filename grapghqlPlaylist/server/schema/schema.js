@@ -6,13 +6,13 @@ const{GraphQLObjectType,GraphQLString, GraphQLSchema,
 
 //dummy Data
 var books =[
-  {name: 'Name of the Wind',genre:'Fantasy',id:'1'},
-  {name: 'The Long Earth',genre:'Sci-Fi',id:'2'},
-  {name: 'Ertugral The legend',genre:'History',id:'3'},
+  {name: 'Name of the Wind',genre:'Fantasy',id:'1',authorId:'1'},
+  {name: 'The Long Earth',genre:'Sci-Fi',id:'2',authorId:'2'},
+  {name: 'Ertugral The legend',genre:'History',id:'3',authorId:'3'},
 ];
 var authors = [
   {name:'Patrick Rothfuss',age:44,id:'1'},
-  {name:'James Husell',age:36,id:'3'},
+  {name:'James Husell',age:36,id:'2'},
   {name:'Adriana Patrick',age:35,id:'3'},
 ]
 
@@ -21,7 +21,15 @@ const BookType = new GraphQLObjectType({
   fields:()=>({
     id:{type:GraphQLID},
     name:{type:GraphQLString},
-    genre:{type:GraphQLString}
+    genre:{type:GraphQLString},
+    author:{
+      type:AuthorType,
+      resolve(parent,args){
+        console.log(parent);
+        return _.find(authors,{id:parent.authorId});
+      }
+      
+    }
   })
 });
 const AuthorType = new GraphQLObjectType({
