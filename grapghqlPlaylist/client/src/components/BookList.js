@@ -6,7 +6,7 @@ render(){
     <div>
       <ul id="book-list">  
         <li>Book Name</li>
-      </ul >
+      </ul>
     </div>
     );
   }
