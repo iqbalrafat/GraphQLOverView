@@ -27,7 +27,7 @@ return <div>Loading books</div>
   }
 }
   render(){
-    console.log(this.props);
+    // console.log(this.props);
   return(
     <div>
       <ul id="book-list">  
