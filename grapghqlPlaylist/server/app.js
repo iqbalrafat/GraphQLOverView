@@ -2,12 +2,12 @@ const express = require ('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require ('cors');
 const app =  express();
+//allow cross origin server
+app.use(cors());
 
 //connect to mongoDB
-
-// mongoose.connect('mongodb+srv://riqbal:Rares4me@cluster0.1iz0b.mongodb.net/travelExperts?retryWrites=true&w=majority',{useNewUrlParser: true});
-
 mongoose.connect('mongodb+srv://riqbal:mongodeveloper@cluster0.vgbez.mongodb.net/graphql?retryWrites=true&w=majority',{useNewUrlParser: true});
 mongoose.connection.once('open',()=>{
   console.log('connected to database');
@@ -25,5 +25,5 @@ graphiql:true
 
 //Sever setup
 app.listen(3000,()=>{
-  console.log("server running port 3001");
+  console.log("server running port 3000");
 });

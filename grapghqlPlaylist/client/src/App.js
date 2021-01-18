@@ -16,7 +16,7 @@ class App extends Component{
       //here we are outputting client that we earlier created using apolloClient.
       <ApolloProvider client={client}>
         <div id="main">      
-            <h1> GraphQL OverView</h1>  
+            <h1> Books Reading List</h1>  
             <BookList />    
         </div>
      </ApolloProvider>
