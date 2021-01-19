@@ -3,6 +3,14 @@ import {graphql} from 'react-apollo';
 import {getAuthorsQuery} from '../queries/queries'
 
 class AddBook extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      name:'',
+      gente:'',
+      authorId:''
+    }
+  }
 displayAuthors(){
   var data=this.props.data;
   if(data.loading){
@@ -14,22 +22,29 @@ displayAuthors(){
       })        
   }
 }
-
+ // The current state of form is empty string so to change the state we use setState. 
+// when we type it generate event that event need to be change
+submitForm(e){
+  e.preventDefault();
+  console.log(this.state);
+  
+}
 render(){
   return(
-    <form id="add-book">
+    <form id="add-book" onSubmit={this.submitForm.bind(this)}>
       <div className="field">
         <label>Book Name:</label>
-        <input type="text" />    
+     
+        <input type="text" onChange={(e)=>this.setState({name:e.target.value})} />    
       </div>
       <div className="field">
         <label>Genre:</label>
-        <input type="text" />    
+        <input type="text" onChange={(e)=>this.setState({Genre:e.target.value})}/>    
       </div>
       <div className="field">
         <label>Author:</label>
         <select>
-        <option>Select Author</option>
+        <option onChange={(e)=>this.setState({authorId:e.target.value})}>Select Author</option>
           {this.displayAuthors()}
         </select> 
       </div>
