@@ -1,18 +1,19 @@
 import React,{Component} from 'react';
 import {graphql} from 'react-apollo';
-import {getAuthorsQuery} from '../queries/queries'
+import compose from 'lodash.flowright';
+import {getAuthorsQuery,addBookMutation} from '../queries/queries'
 
 class AddBook extends Component{
   constructor(props){
     super(props);
     this.state={
       name:'',
-      gente:'',
+      genre:'',
       authorId:''
     }
   }
 displayAuthors(){
-  var data=this.props.data;
+  var data=this.props.getAuthorsQuery;
   if(data.loading){
     return ('Loading authors list')
   }
@@ -26,7 +27,7 @@ displayAuthors(){
 // when we type it generate event that event need to be change
 submitForm(e){
   e.preventDefault();
-  console.log(this.state);
+  this.props.addBookMutation()
   
 }
 render(){
@@ -53,7 +54,13 @@ render(){
   );
  }
 }
-export default graphql(getAuthorsQuery)(AddBook);
+//when we need to bind two queries with component then there are different methods 
+//are available. We are using compose method
+
+export default compose(
+   graphql(getAuthorsQuery,{name:"getAuthorsQuery"}),
+   graphql(addBookMutation,{name:"addBookMutation"})  
+   )(AddBook);
 
 
  
