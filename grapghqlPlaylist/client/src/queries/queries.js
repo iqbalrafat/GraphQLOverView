@@ -18,9 +18,11 @@ const getAuthorsQuery =gql`{
   }
 }
 `
+//for mutation we need add data into DB. For that we use query variable by using $ sign
+//These are the variable which are also define in state. The variable with ! mean not null
 const addBookMutation =gql`
-mutation {
-  addBook(name:"",genre:"",authorId:""){
+mutation($name:String!, $genre:String!, $authorId:ID!) {
+    addBook(name:$name,genre:$genre,authorId:$authorId){
     name
     id
   }
