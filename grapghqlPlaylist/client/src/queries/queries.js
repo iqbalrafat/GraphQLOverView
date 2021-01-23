@@ -29,8 +29,8 @@ mutation($name:String!, $genre:String!, $authorId:ID!) {
 }
 `
 const getBookQuery=gql`
-query($id:ID){
-  book{
+query($id:String){
+  book(id:$id){
     id
     name
     genre
